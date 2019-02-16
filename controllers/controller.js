@@ -28,7 +28,7 @@ module.exports = {
             res.json(result)
         }) 
         .catch(err => {
-            res.status(404).send("not found")
+            res.status(404).send(err)
         })
     },
 
