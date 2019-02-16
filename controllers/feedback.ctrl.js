@@ -37,9 +37,10 @@ module.exports = {
             num = null
         } = req.params
         let rate=parseInt(num,10)
+        if ((rate>5)||(rate<1))
+            throw new Error('rate error!')
         Photo.updateOne({photoID: id}, {$inc: {num_of_rates: 1, rates_sum: rate}})
         .then(result => {
-            console.log("Rate updated!")
             return Photo.find({photoID: id})
         })
         .then(result => {
@@ -55,7 +56,7 @@ module.exports = {
             res.json(result)
         })
         .catch(err => {
-            res.status(404).send("not found")
+            res.status(404).send(err)
         })
     }
 }
