@@ -3,7 +3,7 @@ const   connection = require('../database'),
 
 module.exports = {
     sortByLikes(req, res, next){
-        Photo.find().sort({likes: -1})
+        Photo.find().sort({likes: -1}).limit(6)
         .then(result => {
             res.json(result)
         })
@@ -12,7 +12,7 @@ module.exports = {
         })
     },
     sortByRates(req, res, next){
-        Photo.find().sort({total_rate: -1})
+        Photo.find().sort({total_rate: -1}).limit(6)
         .then(result => {
             res.json(result)
         })
