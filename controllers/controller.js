@@ -1,5 +1,6 @@
 const connection = require('../database'),
       Photo      = require('../models/photo');
+let generator    =  1000;
 
 module.exports = {
     //show all photos
@@ -14,11 +15,11 @@ module.exports = {
     },
     addPhoto(req, res, next){
         const{
-            photoID = null,
             name    = null,
             URL     = null,
             userID  = null
         } = req.body
+        const photoID = generator++;
         //initialize likes and rate:
         let likes = 0, likes_array = null, num_of_rates=0, rates_sum=0,rates_array=null, total_rate=0;
         const photo = new Photo ({photoID, name, URL, userID, likes, likes_array, num_of_rates, rates_sum,rates_array,total_rate})
