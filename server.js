@@ -4,7 +4,7 @@ const ctrl_fb   = require('./controllers/feedback.ctrl');
 const ctrl_us   = require('./controllers/user.ctrl')
 
 const app  = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8080;
 
 app.set('port',port);
 app.use(express.json())
