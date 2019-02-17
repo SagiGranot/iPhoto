@@ -1,15 +1,18 @@
 const connection    = require('../database'),
       User          = require('../models/user'),
       photo         = require('../models/photo');
+let idGenerator     = 1000;
       
 module.exports = {
     addUser(req, res, next){
         const{
-            userID  = null,
             name    = null,
-            email   = null
+            email   = null,
+            password= null,
+            group   = null
         } = req.body
-        const user  = new User ({userID, name, email})
+        const userID = idGenerator++
+        const user  = new User ({userID, name, email, password, group})
         user.save()
         .then(result => {
             console.log("User added!")
