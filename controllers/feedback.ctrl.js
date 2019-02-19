@@ -44,12 +44,24 @@ module.exports = {
     addRate(req, res, next){
         const {
             id  = null,
-            num = null
+            num = null,
+            user = null
         } = req.params
         let rate=parseInt(num,10)
         if ((rate>5)||(rate<1))
             throw new Error('rate error!')
-        Photo.updateOne({photoID: id}, {$inc: {num_of_rates: 1, rates_sum: rate}})
+        Photo.findOne({photoID: id})
+        .then(data => {
+            data.rates_array.map(userid => {
+                if(userid === user)
+                    throw new Error("already rated this photo")
+            })
+            return Photo.updateOne({photoID: id}, {$inc: {num_of_rates: 1, rates_sum: rate}})
+        })
+        .then(result => {
+            return Photo.updateOne({photoID: id}, {$push: {rates_array: user}})
+            
+        })
         .then(result => {
             return Photo.find({photoID: id})
         })

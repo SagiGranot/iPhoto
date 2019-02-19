@@ -24,7 +24,7 @@ app.put('/photo/edit/:id',      ctrl.editPhoto);
 app.get('/photo/sortbylikes',   ctrl_fb.sortByLikes);
 app.get('/photo/sortbyrate',    ctrl_fb.sortByRates);
 app.put('/addlike/:id/:user',   ctrl_fb.addLike);
-app.put('/addrate/:id/:num',    ctrl_fb.addRate);
+app.put('/addrate/:id/:num/:user',ctrl_fb.addRate);
 app.post('/login',              ctrl_us.login);
 app.post('/user',               ctrl_us.addUser);
 app.get('/user/:id',            ctrl_us.getProfile);
