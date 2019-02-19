@@ -1,6 +1,5 @@
 const   connection = require('../database'),
         Photo      = require('../models/photo');
-
 module.exports = {
     sortByLikes(req, res, next){
         Photo.find().sort({likes: -1}).limit(6)
@@ -21,13 +20,24 @@ module.exports = {
         }) 
     },
     addLike(req, res, next){
-        const {id = null} = req.params
-        Photo.updateOne({photoID: id}, {$inc: {likes: 1}})
+        const { id = null,
+                user = null } = req.params
+        Photo.findOne({photoID: id})
+        .then(data => {
+            data.likes_array.map(userid => {
+                if(userid === user)
+                    throw new Error("already liked this photo")
+            })
+            return Photo.updateOne({photoID: id}, {$inc: {likes: 1}})
+        })
         .then(result => {
-            console.log("Like added!")
+            return Photo.updateOne({photoID: id}, {$push: {likes_array: user}})
+            
+        }).then(result => {
             res.json(result)
-        }).catch(err => {
-            res.status(404).send("not found")
+        })
+        .catch(err => {
+            res.status(404).send("ERROR:" + err)
         })
     },
 
