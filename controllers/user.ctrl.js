@@ -1,7 +1,7 @@
 const connection    = require('../database'),
       User          = require('../models/user'),
       photo         = require('../models/photo');
-let idGenerator     = 1000;
+let idGenerator     = 2000;
       
 module.exports = {
     addUser(req, res, next){
