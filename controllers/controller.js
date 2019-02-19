@@ -21,7 +21,7 @@ module.exports = {
         } = req.body
         const photoID = generator++;
         //initialize likes and rate:
-        let likes = 0, likes_array = null, num_of_rates=0, rates_sum=0,rates_array=null, total_rate=0;
+        let likes = 0, likes_array = [], num_of_rates=0, rates_sum=0,rates_array=[], total_rate=0;
         const photo = new Photo ({photoID, name, URL, userID, likes, likes_array, num_of_rates, rates_sum,rates_array,total_rate})
         photo.save()
         .then(result => {
