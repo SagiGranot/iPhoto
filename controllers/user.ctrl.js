@@ -39,5 +39,20 @@ module.exports = {
         .catch(err => {
             console.error(err)
         })
+    },
+
+    login(req, res, next){
+        const{
+            name = null,
+            password = null
+        } = req.body
+        User.findOne({name: name, password: password})
+        .then(result => {
+            res.json(result)
+        })
+        .catch(err => {
+            console.error(err)
+            res.status(404).send("not found")
+        })
     }
 }
