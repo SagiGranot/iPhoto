@@ -84,7 +84,7 @@ module.exports = {
             res.json(result)
         })
         .catch(err => {
-            res.status(404).send(err)
+            res.status(404).send("Error:"+err)
         })
     }
 }
