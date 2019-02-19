@@ -61,7 +61,7 @@ module.exports = {
             if ((group === 'USER')||(group === 'ADMIN'))
                 return Photo.updateOne({photoID: id}, {$inc: {num_of_rates: 1, rates_sum: rate}})
             else if (group === 'PHOTOGRAPHER')
-                return Photo.updateOne({photoID: id}, {$inc: {num_of_rates: 1, rates_sum: 5*rate}})
+                return Photo.updateOne({photoID: id}, {$inc: {num_of_rates: 5, rates_sum: 5*rate}})
 
         })
         .then(result => {
