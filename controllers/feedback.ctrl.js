@@ -45,7 +45,8 @@ module.exports = {
         const {
             id  = null,
             num = null,
-            user = null
+            user = null,
+            group = null
         } = req.params
         let rate=parseInt(num,10)
         if ((rate>5)||(rate<1))
@@ -56,7 +57,12 @@ module.exports = {
                 if(userid === user)
                     throw new Error("already rated this photo")
             })
-            return Photo.updateOne({photoID: id}, {$inc: {num_of_rates: 1, rates_sum: rate}})
+            //PHOTOGRAPHER user has more weight for rates
+            if ((group === 'USER')||(group === 'ADMIN'))
+                return Photo.updateOne({photoID: id}, {$inc: {num_of_rates: 1, rates_sum: rate}})
+            else if (group === 'PHOTOGRAPHER')
+                return Photo.updateOne({photoID: id}, {$inc: {num_of_rates: 1, rates_sum: 5*rate}})
+
         })
         .then(result => {
             return Photo.updateOne({photoID: id}, {$push: {rates_array: user}})
