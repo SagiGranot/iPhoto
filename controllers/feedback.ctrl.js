@@ -76,6 +76,8 @@ module.exports = {
         // get rates_sum & num_of_rates
             let sum     = parseInt(result[0].rates_sum)
             let number  = parseInt(result[0].num_of_rates)
+            if(number === 0)
+                throw new Error("cant calculate rate")
             let avg     = sum / number
             return Photo.updateOne({photoID: id}, {total_rate: avg})
         })
