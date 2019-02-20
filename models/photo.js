@@ -6,7 +6,10 @@ var photo = new mongoose.Schema({
             required: true,
             unique: true
         },
-        name: String,
+        name: {
+            type: String,
+            required: true
+        }, 
         URL: {
             type: String,
             required: true
