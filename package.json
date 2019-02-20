@@ -10,7 +10,10 @@
   "author": "sagi and netta",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.18.0",
+    "cors": "^2.8.5",
     "express": "^4.16.4",
-    "mongoose": "^5.4.5"
+    "mongoose": "^5.4.5",
+    "multer": "^1.4.1"
   }
 }

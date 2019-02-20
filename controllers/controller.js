@@ -1,6 +1,6 @@
 const connection = require('../database'),
       Photo      = require('../models/photo');
-let   generator  = 3000;
+let   generator  = 5000;
 
 module.exports = {
     //show all photos
