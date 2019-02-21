@@ -23,7 +23,6 @@ const upload = multer({ storage })
 app.use(cors());
 app.post('/upload', upload.single('image'), (req, res) => {
     if (req.file){
-        console.log()
         res.json({
         imageUrl: `uploads/${req.file.filename}`
         });
